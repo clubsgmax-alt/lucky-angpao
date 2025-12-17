@@ -134,7 +134,7 @@ const STORAGE_KEY = 'lucky_spin_data';
 function spin() {
   const userId = document.getElementById('userId').value.trim();
   if (!userId) {
-    alert('Silakan masukkan ID terlebih dahulu');
+    alert('Please enter your ID');
     return;
   }
 
@@ -148,7 +148,7 @@ function spin() {
 
   const prize = getPrize();
   document.getElementById('result').innerText =
-    `🎉 Selamat! Anda mendapatkan ${prize}`;
+    `🎉 Congratulations! You’ve won ${prize}`;
 
   data[userId] = now;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
@@ -163,4 +163,5 @@ function getPrize() {
 
 </body>
 </html>
+
 
