@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Tap To Win OXSG</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background:
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    url('https://i.pinimg.com/736x/50/b8/6b/50b86b6e9c070c7557186f6ed14af269.jpg')
+    no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  min-height: 100vh;
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 360px;
+  padding: 36px 28px;
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+
+  box-shadow: 0 0 40px rgba(255, 0, 0, 0.35);
+  text-align: center;
+}
+
+h2 {
+  margin: 0 0 10px;
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #f1f1f1;
+  margin-bottom: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  text-align: center;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+
+  background: linear-gradient(135deg, #b30000, #ff1a1a);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+
+  box-shadow: 0 6px 20px rgba(255, 0, 0, 0.6);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 0, 0, 0.85);
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255,255,255,0.8);
+}
+
+.brand {
+  margin-top: 22px;
+  font-size: 13px;
+  letter-spacing: 2px;
+  opacity: 0.85;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>🎡 LUCKY ANGPAO</h2>
+  <div class="subtitle">
+    Each ID is eligible for <b>1 spin every 24 hours</b>
+  </div>
+
+  <div class="form-group">
+    <input type="text" id="userId" placeholder="Masukkan ID anda">
+    <button onclick="spin()">TAP TO WIN</button>
+  </div>
+
+  <div class="subtitle"><b>🎁 Win Angpao rewards:</b></div>
+  <div class="subtitle">
+    3.88 • 5.88 • 10.88 • 15.88 • 50.88 • 100.88 • 188.88
+  </div>
+
+  <div class="result" id="result"></div>
+  <div class="brand">OXSG EXCLUSIVE EVENT</div>
+</div>
+
+<script>
+const STORAGE_KEY = 'lucky_spin_data';
+
+function spin() {
+  const userId = document.getElementById('userId').value.trim();
+  if (!userId) {
+    alert('Silakan masukkan ID terlebih dahulu');
+    return;
+  }
+
+  const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  const now = Date.now();
+
+  if (data[userId] && now - data[userId] < 24 * 60 * 60 * 1000) {
+    alert('Please try again in 24 hours.');
+    return;
+  }
+
+  const prize = getPrize();
+  document.getElementById('result').innerText =
+    `🎉 Congratulations! You’ve won ${prize}`;
+
+  data[userId] = now;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+function getPrize() {
+  return Math.random() < 0.7
+    ? (Math.random() < 0.5 ? '3.88' : '5.88')
+    : (Math.random() < 0.5 ? '10.88' : '15.88');
+}
+</script>
+
+</body>
+</html>
