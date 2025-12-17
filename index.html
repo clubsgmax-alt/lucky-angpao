@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tap To Win OXSG</title>
 
 <style>
@@ -13,8 +14,8 @@ body {
   font-family: 'Segoe UI', Arial, sans-serif;
   background:
     linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
-    url('https://i.pinimg.com/736x/50/b8/6b/50b86b6e9c070c7557186f6ed14af269.jpg')
-    no-repeat center center fixed;
+    url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092')
+    no-repeat center center;
   background-size: cover;
   color: #fff;
   min-height: 100vh;
@@ -26,10 +27,12 @@ body {
 }
 
 .container {
-  width: 360px;
-  padding: 36px 28px;
-  border-radius: 20px;
+  width: 100%;
+  max-width: 380px;
+  padding: 28px 20px;
+  margin: 16px;
 
+  border-radius: 20px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(8px);
@@ -40,7 +43,7 @@ body {
 
 h2 {
   margin: 0 0 10px;
-  font-size: 28px;
+  font-size: 26px;
   letter-spacing: 1px;
 }
 
@@ -59,7 +62,7 @@ h2 {
 
 input {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   font-size: 16px;
   border-radius: 10px;
   border: none;
@@ -83,9 +86,8 @@ button {
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(255, 0, 0, 0.85);
+button:active {
+  transform: scale(0.98);
 }
 
 .result {
@@ -146,7 +148,7 @@ function spin() {
 
   const prize = getPrize();
   document.getElementById('result').innerText =
-    `🎉 Congratulations! You’ve won ${prize}`;
+    `🎉 Selamat! Anda mendapatkan ${prize}`;
 
   data[userId] = now;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
